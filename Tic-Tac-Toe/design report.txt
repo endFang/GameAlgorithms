@@ -1,0 +1,31 @@
+- Minimax, Backtracing, & Strategy
+
+1. Minimax tree has “max” and “min” two players. Max moves first in the game. The game takes turns until it’s over. Max uses search tree to determine “best” next move. A minimax tree can be built based on a gameboard. Its node will become every possible action and leaf will be terminated state.
+
+2. Backtracing can backtrack to the initial gamestate after many possible tries. Whenever an action leads to losing state, the code will abandon the route and go back to the state before the action is made.
+
+3. I applied offensive strategy to evaluate the gameboard. A winning state will give 10 points. Creating a line-to-be, that means the row/column/diagonal line where the marker at only has the same type marker, will give 1 point. A losing state will give -10 points.
+
+
+
+- DesignThe code has six more functions: askHuman(), computerMove(), depth(), freeSlots(), heuristic(), miniMax()
+
+1. askHuman(), computerMove() They are both utility functions. askHuman() ask the player’s name, while computerMove() calls miniMax() to find the bestMove and place the marker.
+
+2. depth() It searches and returns how many amounts of available places on gameboard. Therefore, the depth can be at most 8 after the first marker is placed because the gameboard will only have eight slots remain.
+
+3. freeSlots() It creates an ArrayList of int[]. Each int[] is {row, col} representing a move/action. The ArrayList will contains every possible actions.
+
+4. heuristic() It evaluates a gameboard based on winning/lose/draw state or how many lines-to-be.
+
+5. miniMax()
+The function will find the bestMove for each action and return it to the above level. It has a bestMove instanced variable. It will recursively call itself:
+
+	1. call freeSlots() to obtain the possible actions.
+	2. take action and create a new board
+	3. if newboard wins/draw, return the action because there is no need to go further
+	4. if newboard lost, abandon this action and backtrack
+	5. if newboard is a partial solution, call heuristic() to have the heuristic value for this move, and call miniMax() on this newBoard.
+	6. Consider the miniMax() returned value and heuristic value to update the bestMove.
+
+
